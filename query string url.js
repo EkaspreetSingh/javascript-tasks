@@ -1,26 +1,34 @@
 function generateQueryString(object, urlString) {
-    if (!Object.entries(object).length || !urlString.length) {
+    if (!object || !urlString) {
         return "Enter valid arguments!";
     }
 
     const params = new URLSearchParams();
 
-    for (const [key, value] of Object.entries(object)) {
+    for(const [key, value] of Object.entries(object)) {
         params.append(key, value);
     }
 
-    return `${urlString}?${params.toString()}`;
+    if(!urlString.includes('?')) {
+        return `${urlString}?${params.toString()}`;
+    }
+    else {
+        return `${urlString}&${params.toString()}`;
+    }
 }
 
-function main() {
-    const obj = {
-        "keyOne": "value One",
-        "keyTwo": "value Two",
-        "keyThree": "value Three",
-    };
-    const url = "https://localhost:400";
 
-    console.log(generateQueryString(obj, url));
-}
+const obj = {
+    "keyOne": "value One",
+    "keyTwo": "value Two",
+    "keyThree": "value Three",
+};
 
-main();
+const url = "https://localhost:400";
+
+console.log(generateQueryString(obj, url));
+
+const url1 = "https://localhost:400?keyZero=value+Zero";
+console.log(generateQueryString(obj, url1));
+
+console.log(generateQueryString(obj)); // error message
