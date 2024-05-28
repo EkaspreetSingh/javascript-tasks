@@ -11,7 +11,10 @@ let obj1 = {
 }
 
 let obj2 = {
-    name : "Manoj",
+    name : {
+        first:'helo',
+        last:'bye'
+    },
     address : {
         city : "Bangalore",
         state : "Karnataka",
@@ -33,8 +36,8 @@ function shallowCopy(obj) {
 function deepCopy(obj) {
     let obj1 = _.cloneDeep(obj);
     // let obj1 = JSON.parse(JSON.stringify(obj));    //we can use this method too
-    obj1.name = "Peter";
-    obj1.address.city = "Noida";
+    // obj1.name = "Peter";
+    // obj1.address.city = "Noida";
     
     console.log("deep copy: " + JSON.stringify(obj1, null, 2));
     console.log("original object: " + JSON.stringify(obj, null, 2));
@@ -43,3 +46,4 @@ function deepCopy(obj) {
 shallowCopy(obj1);
 
 deepCopy(obj2);
+//use other approch

@@ -19,13 +19,12 @@ function generateQueryString(object, urlString) {
 
 
 const obj = {
-    "keyOne": "value One",
+    "keyOne": "value:One",
     "keyTwo": "value Two",
     "keyThree": "value Three",
 };
 
 const url = "https://localhost:400";
-
 console.log(generateQueryString(obj, url));
 
 const url1 = "https://localhost:400?keyZero=value+Zero";

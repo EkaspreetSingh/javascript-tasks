@@ -26,5 +26,5 @@ function countMinReversals(expr) {
     return reversals;
 }
 
-const expr = "}}}{";
+const expr = "{{{}";
 console.log(countMinReversals(expr));
