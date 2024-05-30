@@ -37,26 +37,32 @@ const data = [
     }
   ]
 
-  // future scope...
-  /// curr, edge...
-  const transformedData = data.reduce((acc, { batch_id, name, contact }) => {
-    const existingBatch = acc.find(batch => batch[batch_id]);
-    const newData = {...curr, name, contact };
-    // alwys thinkg about better approach
-    const currData = existingBatch ? existingBatch[batch_id] : acc;
-    currData.push(existingBatch ? {[batch_id]: newData} : newData);
 
-    
-    if (existingBatch) {
-      // curr['batch_id']
-      existingBatch[batch_id].push({ ...curr,name, contact });
-    } else {
-      acc.push({ [batch_id]: [{...curr, name, contact }] });
-    }
-    
-    return acc;
-  }, []);
-  
-  console.log(JSON.stringify(transformedData, null, 2));
+const transformedData = data.reduce((acc, curr) => {
 
-  
+  // Destructure the current object to separate batch_id from the rest of the properties
+  const { batch_id, ...rest } = curr;
+
+  let batch = -1;
+  for(let i=0; i<acc.length; i++) {
+    if(acc[i][batch_id] !== undefined) batch = i;
+  }
+  console.log(batch)
+
+  // Check if the batch_id does not exists in the accumulator object
+  if (batch == -1) {
+    let arr = [];
+    arr.push(rest);
+    let newObj = { }
+    newObj[batch_id] = arr;
+    acc.push(newObj)
+  }
+  else {
+    if(acc[batch][batch_id])
+    acc[batch][batch_id].push(rest)
+  }
+
+  return acc;
+}, []);
+
+console.log(JSON.stringify(transformedData, null, 2));

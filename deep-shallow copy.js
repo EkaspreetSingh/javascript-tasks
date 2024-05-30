@@ -43,7 +43,21 @@ function deepCopy(obj) {
     console.log("original object: " + JSON.stringify(obj, null, 2));
 }
 
-shallowCopy(obj1);
+function deepCopyRecur(obj) {
+    let copyObj = {};
+    for (let key in obj) {
+        if (typeof obj[key] === 'object') {
+            copyObj[key] = deepCopyRecur(obj[key]);
+        } else {
+            copyObj[key] = obj[key];
+        }
+    }
+    return copyObj;
+}
 
-deepCopy(obj2);
+// shallowCopy(obj1);
+
+// deepCopy(obj2);
 //use other approch
+
+console.log(deepCopyRecur(obj2))
